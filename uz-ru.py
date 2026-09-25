@@ -15,3 +15,8 @@ tree = ET.parse(tmx_path)
 root = tree.getroot()
 print(root.tag)
 
+pairs=[]
+
+for tu in root.iter("tu"):
+    uz_text=None 
+    ru_text=None 
