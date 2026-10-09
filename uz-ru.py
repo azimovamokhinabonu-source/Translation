@@ -20,3 +20,4 @@ pairs=[]
 for tu in root.iter("tu"):
     uz_text=None 
     ru_text=None 
+# change
