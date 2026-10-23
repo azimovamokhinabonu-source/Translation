@@ -3,9 +3,65 @@ from datasets import load_dataset
 ds = load_dataset("Helsinki-NLP/multiun", "ru-zh")
 
 import argparse
+import hashlib
+import json
+import sys
 import re 
 import unicodedata 
 from collections import Counter
+
+
+# ---------------------------------------------------------
+# Konsol encoding
+# ---------------------------------------------------------
+
+# Windows kabi muhitlarda stdout UTF-8 bo'lmasa,
+# Unicode belgilarni print qilishda xato chiqmasligi uchun.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(
+        encoding = "utf-8", 
+        errors="replace"
+    )
+
+# ---------------------------------------------------------
+# Asosiy konstantalar
+# ---------------------------------------------------------
+
+# UTF-8 BOM:
+# ayrim fayllarning birinchi qatori shundan boshlanishi mumkin.
+UTF8_BOM = b"\xef\xbb\xbf"
+
+# Unicode replacement character:
+#
+#     �
+#
+# Bu odatda matn noto'g'ri decode qilinganini bildiradi.
+
+replacement_char = "\ufffd"
+# ---------------------------------------------------------
+# Regexlar
+# ---------------------------------------------------------
+
+# Vertical tab, form feed, next line,
+# Unicode line separator va paragraph separator.
+#
+# Ularni o'chirib yubormaymiz, probelga aylantiramiz.
+# Aks holda ikkita so'z bir-biriga yopishib qolishi mumkin.
+ line_sepe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # ---------- Regexlar va jadvallar ----------
 
@@ -20,4 +76,4 @@ boshliq = re.compile(r"\s+")
 
 # o' va g' (hamda ma'lumot, e'lon kabi) uchun apostrof variantlari
 apostroflar="ʻʼ‘’`´′‵ʹ՚＇'"
-apos_re= re.compile(rf"(?<=[A-Za-z])[{re.escape(apostroflar)}](?=[A-Za-z]|
+apos_re= re.compile(rf"(?<=[A-Za-z])[{re.escape(apostroflar)}](?=[A-Za-z]| 
